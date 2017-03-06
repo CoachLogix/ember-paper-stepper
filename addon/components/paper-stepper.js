@@ -45,8 +45,9 @@ export default Component.extend(ParentMixin, {
 
   nextStep() {
     if (this.get('currentStep') < this.get('totalSteps')) {
-      this.sendAction('onStepChange', this.get('currentStep') + 1);
-      if (this.get('currentStep') === this.get('totalSteps')) {
+      let nextStep = this.get('currentStep') + 1;
+      this.sendAction('onStepChange', nextStep);
+      if (nextStep === this.get('totalSteps')) {
         this.sendAction('onStepperCompleted');
       }
     }

@@ -219,3 +219,32 @@ test('nextStep and previousStep actions changes the current step', function(asse
 
   assert.ok(buttons.eq(0).hasClass('md-active'), 'first step has md-active class again');
 });
+
+test('nextStep and previousStep actions changes the current step', function(assert) {
+  assert.expect(2);
+
+  this.currentStep = 2;
+  this.onStepperCompleted = () => {
+    assert.ok(true, 'onStepperCompleted was called');
+  };
+
+  this.render(hbs`
+    {{#paper-stepper vertical=vertical currentStep=currentStep onStepperCompleted=(action onStepperCompleted) as |stepper|}}
+      {{stepper.step label="Step 1"}}
+      {{stepper.step label="Step 2"}}
+      {{#stepper.step label="Step 3" as |step|}}
+        {{#step.actions as |nextStep|}}
+          {{#paper-button class="next-button" onClick=(action nextStep)}}
+            Complete
+          {{/paper-button}}
+        {{/step.actions}}
+      {{/stepper.step}}
+    {{/paper-stepper}}
+  `);
+
+  let buttons = this.$('.md-steppers-horizontal button.md-stepper-indicator');
+
+  assert.ok(buttons.eq(2).hasClass('md-active'), 'last step has md-active class');
+
+  this.$('.next-button').click();
+});

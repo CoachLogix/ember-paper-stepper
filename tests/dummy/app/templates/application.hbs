@@ -80,11 +80,11 @@
 
   {{#stepper.step label="Create an ad" optional=true as |step|}}
     {{#step.body}}
-      Step 3 content
+      <p>You are about to finish the stepper. Press "Complete".</p>
     {{/step.body}}
     {{#step.actions as |nextStep previousStep|}}
       {{#paper-button primary=true raised=true onClick=(action nextStep)}}
-        Continue
+        Complete
       {{/paper-button}}
       {{#paper-button onClick=(action previousStep)}}
         Back
