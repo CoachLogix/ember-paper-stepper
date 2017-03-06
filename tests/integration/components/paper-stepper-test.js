@@ -35,6 +35,16 @@ test('adds alternative class if `alternative` is true', function(assert) {
   assert.ok(this.$('.md-steppers').hasClass('md-steppers-alternative'), 'alternative class is present');
 });
 
+test('adds mobile class if `mobileStepper` is true', function(assert) {
+  assert.expect(1);
+
+  this.render(hbs`
+    {{paper-stepper mobileStepper=true}}
+  `);
+
+  assert.ok(this.$('.md-steppers').hasClass('md-steppers-mobile-step-text'), 'mobile class is present');
+});
+
 ['vertical', 'horizontal'].forEach((mode) => {
   let vertical = mode === 'vertical';
 

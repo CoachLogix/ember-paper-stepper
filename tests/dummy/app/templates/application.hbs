@@ -10,6 +10,9 @@
       Toggle alternative
     {{/paper-button}}
   {{/unless}}
+  {{#paper-button primary=true raised=true onClick=(action "toggle" "mobileStepper")}}
+    Toggle mobile stepper
+  {{/paper-button}}
 </div>
 <div class="layout-row layout-padding layout-align-center-center" style="padding: 20px 40px">
   <div>Current step:</div>
@@ -37,12 +40,17 @@
   linear=linear
   vertical=vertical
   alternative=alternative
+  mobileStepper=mobileStepper
   onStepChange=(action (mut currentStep))
   onStepperCompleted=(action (mut showCompleteDialog) true) as |stepper|}}
 
   {{#stepper.step label="Select a campaign" as |step|}}
     {{#step.body}}
-      Step 1 content
+      <p>Lorem ipsum dolor sit amet, sea in hinc oporteat sententiae, eros bonorum verterem no mea. Ei nec omnis mucius aliquam, sint tota offendit qui ex. Ad sed exerci explicari, has cu vero inermis. Nec quando fabulas ea, dicant deleniti reformidans id his, te primis legimus convenire vim. Te mea aperiri laoreet expetendis. Possim persecuti ea per, graeci putent urbanitas sed in, ius admodum volutpat ea.</p>
+      <p>Ei mel dolorem posidonium consectetuer, id mea quem convenire. Aliquam disputationi eu qui, ei cum clita oporteat oportere, semper oblique voluptaria id duo. His eu consul legimus nusquam, labore blandit facilisis an vim, rebum libris ridens ea est. Ei impedit antiopam his. No deseruisse vituperatoribus pro.</p>
+      <p>Eos et dicit melius propriae, numquam ponderum quaestio id has. Ne equidem accusata urbanitas nec, ex cibo consul libris ius. Nonumes noluisse qui cu, ea sed ipsum nullam. Ex case nihil affert quo, oratio veniam et vix. Probatus ocurreret eu mea, libris timeam euismod est ei.</p>
+      <p>Pri eu aliquid propriae antiopam. No cum fugit nemore diceret. Quo postea intellegebat ut. Amet consulatu eu nam. Te tantas sententiae cum, quot latine aliquam pro ne.</p>
+      <p>Sit duis possit option ad. Et eum veri interpretaris. Nec nobis cetero pertinax ne. Id eam.</p>
     {{/step.body}}
     {{#step.actions as |nextStep previousStep|}}
       {{#paper-button primary=true raised=true onClick=(action nextStep)}}
@@ -54,18 +62,20 @@
     {{/step.actions}}
   {{/stepper.step}}
 
-  {{#stepper.step label="Create a group" as |step|}}
-    {{#step.body}}
-      Step 2 content
-    {{/step.body}}
-    {{#step.actions as |nextStep previousStep|}}
-      {{#paper-button primary=true raised=true onClick=(action nextStep)}}
-        Continue
-      {{/paper-button}}
-      {{#paper-button onClick=(action previousStep)}}
-        Back
-      {{/paper-button}}
-    {{/step.actions}}
+  {{#stepper.step label="Create a group" error=(if isInvalid "Please fill in all the fields.") as |step|}}
+    {{#paper-form onValidityChange=(action "validityChange") as |form|}}
+      {{#step.body}}
+        {{form.input required=true label="Group name" value=groupName onChange=(action (mut groupName))}}
+      {{/step.body}}
+      {{#step.actions as |nextStep previousStep|}}
+        {{#paper-button primary=true raised=true disabled=form.isInvalid onClick=(action nextStep)}}
+          Continue
+        {{/paper-button}}
+        {{#paper-button onClick=(action previousStep)}}
+          Back
+        {{/paper-button}}
+      {{/step.actions}}
+    {{/paper-form}}
   {{/stepper.step}}
 
   {{#stepper.step label="Create an ad" optional=true as |step|}}

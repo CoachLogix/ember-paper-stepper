@@ -42,7 +42,7 @@
     "ember-disable-prototype-extensions": "^1.1.0",
     "ember-export-application-global": "^1.0.5",
     "ember-load-initializers": "^0.6.0",
-    "ember-paper": "1.0.0-alpha.16",
+    "ember-paper": "miguelcobain/ember-paper#master",
     "ember-resolver": "^2.0.3",
     "ember-source": "~2.11.0",
     "ember-welcome-page": "^2.0.2",
