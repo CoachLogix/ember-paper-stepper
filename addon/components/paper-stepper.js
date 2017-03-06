@@ -21,6 +21,7 @@ export default Component.extend(ParentMixin, {
   stepComponent: 'paper-step',
 
   linear: computedFallbackIfUndefined(true),
+  vertical: computedFallbackIfUndefined(false),
 
   // fallback to 0 if is undefined
   currentStep: computedFallbackIfUndefined(0),
