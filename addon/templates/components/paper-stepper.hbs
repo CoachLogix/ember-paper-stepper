@@ -10,19 +10,20 @@
         currentStep=currentStep
         linear=linear
         vertical=vertical
+        nextStep=(action nextStep)
+        previousStep=(action previousStep)
+        goTo=(action goTo)
         parentComponent=this)
     )}}
   </md-steppers-content>
 
   {{#unless vertical}}
     <div class="md-steppers-header-region">
+
       <md-steppers-header class="md-steppers-header md-steppers-horizontal md-whiteframe-1dp">
         {{#each steps as |step|}}
-          <button class="md-stepper-indicator
-            {{if step.isActive "md-active"}}
-            {{if step.isCompleted "md-completed"}}
-            {{if step.hasError "md-error"}}
-            {{if step.showOptional "md-stepper-optional"}}">
+          <button class="md-stepper-indicator {{if step.isActive "md-active"}} {{if step.isCompleted "md-completed"}} {{if step.hasError "md-error"}} {{if step.showOptional "md-stepper-optional"}}" disabled={{step.isButtonDisabled}}
+            onclick={{if linear null (action goTo step.stepNumber)}}>
             <div class="md-stepper-indicator-wrapper">
 
               {{#if step.hasError}}
@@ -32,7 +33,7 @@
               {{else}}
                 <div class="md-stepper-number">
                   {{#if step.isCompleted}}
-                    {{paper-icon class="md-stepper-icon" icon="check-circle"}}
+                    {{paper-icon class="md-stepper-icon" icon="check"}}
                   {{else}}
                     <span>{{step.stepNumberLabel}}</span>
                   {{/if}}
@@ -47,7 +48,7 @@
                   </small>
                 {{else}}
                   {{#if step.optional}}
-                    <small>{{optionalLabel}}</small>
+                    <small>{{step.optionalLabel}}</small>
                   {{/if}}
                 {{/if}}
               </div>
@@ -56,6 +57,7 @@
           </button>
         {{/each}}
       </md-steppers-header>
+
       {{#if mobileStepper}}
         <md-steppers-mobile-header class="md-steppers-mobile-header">
           <md-toolbar flex="none" class="md-whiteframe-1dp" style="background: #f6f6f6 !important; color: #202020 !important;">
@@ -67,6 +69,7 @@
           </md-toolbar>
         </md-steppers-mobile-header>
       {{/if}}
+
     </div>
   {{/unless}}
 

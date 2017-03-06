@@ -6,10 +6,10 @@ const { Component, computed, String: { loc } } = Ember;
 export default Component.extend(ParentMixin, {
   layout,
   tagName: 'md-stepper',
+
   stepComponent: 'paper-step',
-  optionalLabel: 'Optional',
-  stepLabel: 'Step',
-  ofLabel: 'of',
+
+  linear: true,
 
   currentStep: 0,
   currentStepLabel: computed('currentStep', function() {
@@ -24,6 +24,27 @@ export default Component.extend(ParentMixin, {
     let { mobileHeaderTemplate, currentStepLabel, totalSteps } = this.getProperties('mobileHeaderTemplate', 'currentStepLabel', 'totalSteps');
     return loc(mobileHeaderTemplate, [currentStepLabel, totalSteps]);
   }),
+
+  goTo(stepNumber) {
+    if (stepNumber < this.get('totalSteps')) {
+      this.set('currentStep', stepNumber);
+    }
+  },
+
+  nextStep() {
+    if (this.get('currentStep') < this.get('totalSteps')) {
+      this.incrementProperty('currentStep');
+      if (this.get('currentStep') === this.get('totalSteps')) {
+        this.sendAction('onStepperCompleted');
+      }
+    }
+  },
+
+  previousStep() {
+    if (this.get('currentStep') > 0) {
+      this.decrementProperty('currentStep');
+    }
+  },
 
   registerChild(childComponent) {
     this._super(...arguments);

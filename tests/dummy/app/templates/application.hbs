@@ -1,12 +1,49 @@
-{{#paper-stepper as |stepper|}}
+<div>
+  {{#paper-button primary=true raised=true onClick=(action "toggle" "linear")}}
+    Toggle {{if linear "non-" ""}}linear
+  {{/paper-button}}
+  {{#paper-button primary=true raised=true onClick=(action "toggle" "vertical")}}
+    Toggle {{if vertical "horizontal" "vertical"}}
+  {{/paper-button}}
+  {{#unless vertical}}
+    {{#paper-button primary=true raised=true onClick=(action "toggle" "alternative")}}
+      Toggle alternative
+    {{/paper-button}}
+  {{/unless}}
+</div>
+
+{{#paper-stepper
+  linear=linear
+  vertical=vertical
+  alternative=alternative
+  onStepperCompleted=(action "completed") as |stepper|}}
+
   {{#stepper.step label="Select a campaign" as |step|}}
     {{#step.body}}
       Step 1 content
     {{/step.body}}
+    {{#step.actions as |nextStep previousStep|}}
+      {{#paper-button primary=true raised=true onClick=(action nextStep)}}
+        Continue
+      {{/paper-button}}
+      {{#paper-button onClick=(action previousStep)}}
+        Back
+      {{/paper-button}}
+    {{/step.actions}}
   {{/stepper.step}}
-  {{#stepper.step label="Create a group" as |step|}}
+
+  {{#stepper.step label="Create a group" optional=true as |step|}}
     {{#step.body}}
       Step 2 content
     {{/step.body}}
+    {{#step.actions as |nextStep previousStep|}}
+      {{#paper-button primary=true raised=true onClick=(action nextStep)}}
+        Continue
+      {{/paper-button}}
+      {{#paper-button onClick=(action previousStep)}}
+        Back
+      {{/paper-button}}
+    {{/step.actions}}
   {{/stepper.step}}
+
 {{/paper-stepper}}

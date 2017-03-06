@@ -1,11 +1,8 @@
 <div class="md-stepper {{if isActive "md-active"}}">
   {{#if vertical}}
     <md-steppers-header class="md-steppers-header md-steppers-vertical">
-      <button class="md-stepper-indicator
-        {{if isActive "md-active"}}
-        {{if isCompleted "md-complete"}}
-        {{if hasError "md-error"}}
-        {{if showOptional "md-stepper-optional"}}" disabled={{isButtonDisabled}}>
+      <button class="md-stepper-indicator {{if isActive "md-active"}} {{if isCompleted "md-completed"}} {{if hasError "md-error"}} {{if showOptional "md-stepper-optional"}}" disabled={{isButtonDisabled}}
+        onclick={{if linear null (action goTo stepNumber)}}>
         <div class="md-stepper-indicator-wrapper">
 
           {{#if hasError}}
@@ -15,7 +12,7 @@
           {{else}}
             <div class="md-stepper-number">
               {{#if isCompleted}}
-                {{paper-icon class="md-stepper-icon" icon="check-circle"}}
+                {{paper-icon class="md-stepper-icon" icon="check"}}
               {{else}}
                 <span>{{stepNumberLabel}}</span>
               {{/if}}
@@ -39,10 +36,14 @@
       </button>
     </md-steppers-header>
   {{/if}}
-  <md-steppers-scope>
-    {{yield (hash
-      body=(component bodyComponent)
-      actions=(component actionsComponent)
-    )}}
-  </md-steppers-scope>
+
+  {{#if isActive}}
+    <md-steppers-scope class="layout-column md-steppers-scope">
+      {{yield (hash
+        body=(component bodyComponent)
+        actions=(component actionsComponent nextStep=nextStep previousStep=previousStep)
+      )}}
+    </md-steppers-scope>
+  {{/if}}
+
 </div>
