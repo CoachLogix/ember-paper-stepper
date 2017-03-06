@@ -16,9 +16,9 @@
       Toggle mobile stepper
     {{/paper-button}}
   </div>
-  <div class="layout-row layout-padding layout-align-center-center" style="padding: 20px 40px; overflow: hiddin">
+  <div class="layout-row layout-padding layout-align-center-center" style="padding: 20px 40px">
     <div>Current step:</div>
-    <div class="flex">{{paper-slider discrete=true min=0 max=2 value=currentStep onChange=(action (mut currentStep))}}</div>
+    <div class="flex">{{paper-slider discrete=true min=0 max=3 value=currentStep onChange=(action (mut currentStep))}}</div>
   </div>
 
   {{#if showCompleteDialog}}
