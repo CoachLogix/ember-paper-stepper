@@ -4,14 +4,20 @@
   "description": "The default blueprint for ember-cli addons.",
   "keywords": [
     "ember-addon"
+    "ember-paper",
+    "ember-paper-stepper",
+    "material design"
   ],
   "license": "MIT",
-  "author": "",
+  "author": "Miguel Andrade <jmandrade0@gmail.com>",
   "directories": {
     "doc": "doc",
     "test": "tests"
   },
-  "repository": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CoachLogix/ember-paper-stepper.git"
+  },
   "scripts": {
     "build": "ember build",
     "start": "ember server",
