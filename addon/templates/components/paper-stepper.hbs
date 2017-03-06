@@ -1,0 +1,73 @@
+<div class="flex md-steppers
+  {{if linear "md-steppers-linear"}}
+  {{if alternative "md-steppers-alternative"}}
+  {{if vertical "md-steppers-vertical"}}
+  {{if mobileStepper "md-steppers-mobile-step-text"}}">
+
+  <md-steppers-content class="md-steppers-content">
+    {{yield (hash
+      step=(component stepComponent
+        currentStep=currentStep
+        linear=linear
+        vertical=vertical
+        parentComponent=this)
+    )}}
+  </md-steppers-content>
+
+  {{#unless vertical}}
+    <div class="md-steppers-header-region">
+      <md-steppers-header class="md-steppers-header md-steppers-horizontal md-whiteframe-1dp">
+        {{#each steps as |step|}}
+          <button class="md-stepper-indicator
+            {{if step.isActive "md-active"}}
+            {{if step.isCompleted "md-completed"}}
+            {{if step.hasError "md-error"}}
+            {{if step.showOptional "md-stepper-optional"}}">
+            <div class="md-stepper-indicator-wrapper">
+
+              {{#if step.hasError}}
+                <div class="md-stepper-error-indicator">
+                  {{paper-icon "warning"}}
+                </div>
+              {{else}}
+                <div class="md-stepper-number">
+                  {{#if step.isCompleted}}
+                    {{paper-icon class="md-stepper-icon" icon="check-circle"}}
+                  {{else}}
+                    <span>{{step.stepNumberLabel}}</span>
+                  {{/if}}
+                </div>
+              {{/if}}
+
+              <div class="md-stepper-title">
+                <span>{{step.label}}</span>
+                {{#if step.hasError}}
+                  <small class="md-stepper-error-message">
+                    {{step.error}}
+                  </small>
+                {{else}}
+                  {{#if step.optional}}
+                    <small>{{optionalLabel}}</small>
+                  {{/if}}
+                {{/if}}
+              </div>
+
+            </div>
+          </button>
+        {{/each}}
+      </md-steppers-header>
+      {{#if mobileStepper}}
+        <md-steppers-mobile-header class="md-steppers-mobile-header">
+          <md-toolbar flex="none" class="md-whiteframe-1dp" style="background: #f6f6f6 !important; color: #202020 !important;">
+            <div class="md-toolbar-tools">
+              <h3>
+                <span>{{mobileHeaderLabel}}</span>
+              </h3>
+            </div>
+          </md-toolbar>
+        </md-steppers-mobile-header>
+      {{/if}}
+    </div>
+  {{/unless}}
+
+</div>

@@ -1,5 +1,12 @@
-{{!-- The following component displays Ember's default welcome message. --}}
-{{welcome-page}}
-{{!-- Feel free to remove this! --}}
-
-{{outlet}}
+{{#paper-stepper as |stepper|}}
+  {{#stepper.step label="Select a campaign" as |step|}}
+    {{#step.body}}
+      Step 1 content
+    {{/step.body}}
+  {{/stepper.step}}
+  {{#stepper.step label="Create a group" as |step|}}
+    {{#step.body}}
+      Step 2 content
+    {{/step.body}}
+  {{/stepper.step}}
+{{/paper-stepper}}
