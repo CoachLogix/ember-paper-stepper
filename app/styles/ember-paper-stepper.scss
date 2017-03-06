@@ -16,6 +16,8 @@ $swift-linear-duration: 0.08s;
 $swift-linear-timing-function: linear;
 $swift-linear: all $swift-linear-duration $swift-linear-timing-function;
 
+$paper-stepper-primary: color($primary);
+
 md-stepper {
   display: block;
 }
@@ -137,7 +139,7 @@ md-steppers-header, md-steppers-mobile-header, md-step-actions {
   &.md-completed,
   &.md-active {
     .md-stepper-number {
-      background-color: #2196F3;
+      background-color: $paper-stepper-primary;
     }
 
     .md-stepper-title {

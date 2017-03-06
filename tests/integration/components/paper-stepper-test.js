@@ -140,7 +140,7 @@ test('adds alternative class if `alternative` is true', function(assert) {
     this.linear = true;
 
     this.render(hbs`
-      {{#paper-stepper vertical=vertical linear=linear as |stepper|}}
+      {{#paper-stepper vertical=vertical linear=linear currentStep=currentStep onStepChange=(action (mut currentStep)) as |stepper|}}
         {{stepper.step label="Step 1"}}
         {{stepper.step label="Step 2"}}
         {{stepper.step label="Step 3"}}
@@ -178,7 +178,7 @@ test('nextStep and previousStep actions changes the current step', function(asse
   assert.expect(3);
 
   this.render(hbs`
-    {{#paper-stepper vertical=vertical as |stepper|}}
+    {{#paper-stepper vertical=vertical currentStep=currentStep onStepChange=(action (mut currentStep)) as |stepper|}}
       {{#stepper.step label="Step 1" as |step|}}
         {{#step.actions as |nextStep|}}
           {{#paper-button class="next-button" onClick=(action nextStep)}}

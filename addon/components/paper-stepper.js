@@ -3,15 +3,27 @@ import layout from '../templates/components/paper-stepper';
 import { ParentMixin } from 'ember-composability-tools';
 const { Component, computed, String: { loc } } = Ember;
 
+function computedFallbackIfUndefined(fallback) {
+  return computed({
+    get() {
+      return fallback;
+    },
+    set(_, v) {
+      return v === undefined ? fallback : v;
+    }
+  });
+}
+
 export default Component.extend(ParentMixin, {
   layout,
   tagName: 'md-stepper',
 
   stepComponent: 'paper-step',
 
-  linear: true,
+  linear: computedFallbackIfUndefined(true),
 
-  currentStep: 0,
+  // fallback to 0 if is undefined
+  currentStep: computedFallbackIfUndefined(0),
   currentStepLabel: computed('currentStep', function() {
     return this.get('currentStep') + 1;
   }),
@@ -27,13 +39,13 @@ export default Component.extend(ParentMixin, {
 
   goTo(stepNumber) {
     if (stepNumber < this.get('totalSteps')) {
-      this.set('currentStep', stepNumber);
+      this.sendAction('onStepChange', stepNumber);
     }
   },
 
   nextStep() {
     if (this.get('currentStep') < this.get('totalSteps')) {
-      this.incrementProperty('currentStep');
+      this.sendAction('onStepChange', this.get('currentStep') + 1);
       if (this.get('currentStep') === this.get('totalSteps')) {
         this.sendAction('onStepperCompleted');
       }
@@ -42,7 +54,7 @@ export default Component.extend(ParentMixin, {
 
   previousStep() {
     if (this.get('currentStep') > 0) {
-      this.decrementProperty('currentStep');
+      this.sendAction('onStepChange', this.get('currentStep') - 1);
     }
   },
 

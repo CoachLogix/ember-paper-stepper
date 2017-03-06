@@ -11,12 +11,34 @@
     {{/paper-button}}
   {{/unless}}
 </div>
+<div class="layout-row layout-padding layout-align-center-center" style="padding: 20px 40px">
+  <div>Current step:</div>
+  <div class="flex" >{{paper-slider discrete=true min=0 max=2 value=currentStep onChange=(action (mut currentStep))}}</div>
+</div>
+
+{{#if showCompleteDialog}}
+  {{#paper-dialog onClose=(action (mut showCompleteDialog) false)}}
+
+    {{#paper-dialog-content}}
+      <h2 class="md-title">Congratulations!</h2>
+      <p>You completed the stepper.</p>
+    {{/paper-dialog-content}}
+
+    {{#paper-dialog-actions class="layout-row"}}
+      <span class="flex"></span>
+      {{#paper-button primary=true onClick=(action (mut showCompleteDialog) false)}}Ok{{/paper-button}}
+    {{/paper-dialog-actions}}
+
+  {{/paper-dialog}}
+{{/if}}
 
 {{#paper-stepper
+  currentStep=currentStep
   linear=linear
   vertical=vertical
   alternative=alternative
-  onStepperCompleted=(action "completed") as |stepper|}}
+  onStepChange=(action (mut currentStep))
+  onStepperCompleted=(action (mut showCompleteDialog) true) as |stepper|}}
 
   {{#stepper.step label="Select a campaign" as |step|}}
     {{#step.body}}
@@ -32,9 +54,23 @@
     {{/step.actions}}
   {{/stepper.step}}
 
-  {{#stepper.step label="Create a group" optional=true as |step|}}
+  {{#stepper.step label="Create a group" as |step|}}
     {{#step.body}}
       Step 2 content
+    {{/step.body}}
+    {{#step.actions as |nextStep previousStep|}}
+      {{#paper-button primary=true raised=true onClick=(action nextStep)}}
+        Continue
+      {{/paper-button}}
+      {{#paper-button onClick=(action previousStep)}}
+        Back
+      {{/paper-button}}
+    {{/step.actions}}
+  {{/stepper.step}}
+
+  {{#stepper.step label="Create an ad" optional=true as |step|}}
+    {{#step.body}}
+      Step 3 content
     {{/step.body}}
     {{#step.actions as |nextStep previousStep|}}
       {{#paper-button primary=true raised=true onClick=(action nextStep)}}
