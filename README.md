@@ -9,6 +9,7 @@ An example usage:
 ```hbs
 {{#paper-stepper currentStep=currentStep onStepChange=(action (mut currentStep))
   onStepperCompleted=(action "saveModel") as |stepper|}}
+  
   {{#stepper.step label="Select how it looks" as |step|}}
     {{#step.body}}
       {{!-- Content here. Probably some form. --}}
