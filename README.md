@@ -7,8 +7,7 @@ This is an [ember-paper](https://github.com/miguelcobain/ember-paper) addon that
 An example usage:
 
 ```hbs
-{{#paper-stepper
-  currentStep=currentStep onStepChange=(action (mut currentStep))
+{{#paper-stepper currentStep=currentStep onStepChange=(action (mut currentStep))
   onStepperCompleted=(action "saveModel") as |stepper|}}
   {{#stepper.step label="Select how it looks" as |step|}}
     {{#step.body}}
@@ -48,7 +47,7 @@ Don't forget to import your styles in your `app.scss` **after** importing ember 
 
 ## API
 
-### `{{#paper-stepper}}`
+### `{{#paper-stepper as |stepper|}}`
 
 - `vertical` - defaults to `false` - this toggles the stepper between vertical and horizontal modes.
 - `linear` - defaults to `true` - if `true`, the user must pass through all the steps in a "linear" fashion. If `false`, the user is able to click on the steps at will, not following any particular order.
@@ -59,7 +58,7 @@ Don't forget to import your styles in your `app.scss` **after** importing ember 
 
 This component yields a hash that contains a `step` component which you can use to define multiple steps.
 
-### `{{#stepper.step}}`
+### `{{#stepper.step as |step|}}`
 
 - `label` - the label to display on the header buttons.
 - `optional` - if `true`, an optional styling and label are rendered on the respective step header button.
