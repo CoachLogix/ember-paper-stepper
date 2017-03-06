@@ -9,7 +9,7 @@ An example usage:
 ```hbs
 {{#paper-stepper currentStep=currentStep onStepChange=(action (mut currentStep))
   onStepperCompleted=(action "saveModel") as |stepper|}}
-  
+
   {{#stepper.step label="Select how it looks" as |step|}}
     {{#step.body}}
       {{!-- Content here. Probably some form. --}}
@@ -72,14 +72,13 @@ This component yields a hash that contains a `body` and an `actions` component w
 
 ### `{{#step.body}}`
 
-Use component just to render your content with the correct styles.
+Use this component just to render your content with the correct styles.
 
 ### `{{#step.actions as |nextStep previousStep|}}`
 
 This component yields two actions: `nextStep` and `previousStep`.
 You can use those actions in any way you prefer.
 They work perfectly using ember-paper's paper-button like: `{{#paper-button onClick=(action nextStep)`
-
 
 ## Running
 
