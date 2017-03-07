@@ -483,7 +483,7 @@ md-icon.md-default-theme.md-stepper-icon {
 
   md-step-body {
     padding-bottom: 16px;
-    
+    overflow: visible; // reset to overflow visible
     & > *:last-child {
       margin-bottom: 0;
     }
