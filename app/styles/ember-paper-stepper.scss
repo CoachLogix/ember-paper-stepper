@@ -455,7 +455,7 @@ md-icon.md-default-theme.md-stepper-icon {
   }
 
   .md-stepper {
-    padding: 8px 0;
+    padding: 8px 24px;
   }
 
   .md-steppers-scope {
@@ -471,6 +471,7 @@ md-icon.md-default-theme.md-stepper-icon {
 
   md-step-actions {
     padding-top: 16px;
+    padding-bottom: 40px;
 
     & > .md-button:first-child {
       margin-left: 0;
