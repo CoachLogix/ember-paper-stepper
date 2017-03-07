@@ -1,6 +1,6 @@
 <div class="md-stepper {{if isActive "md-active"}}">
   {{#if vertical}}
-    <md-steppers-header class="md-steppers-header md-steppers-vertical">
+    <md-steppers-header class="md-steppers-header">
       <button class="md-stepper-indicator {{if isActive "md-active"}} {{if isCompleted "md-completed"}} {{if hasError "md-error"}}" disabled={{isButtonDisabled}}
         onclick={{if linear null (action goTo stepNumber)}}>
         <div class="md-stepper-indicator-wrapper">

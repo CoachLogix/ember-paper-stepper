@@ -440,13 +440,14 @@ md-icon.md-default-theme.md-stepper-icon {
 
 
 .md-steppers-vertical {
+  padding: 24px;
 
   .md-stepper-number {
     margin: 0 8px 0 0;
   }
 
   .md-stepper {
-    padding: 8px 24px;
+    padding: 0;
   }
 
   .md-steppers-scope {
@@ -465,6 +466,10 @@ md-icon.md-default-theme.md-stepper-icon {
       .md-steppers-scope {
         display: none;
       }
+    }
+
+    md-step-actions {
+      padding-bottom: 0;
     }
   }
 
