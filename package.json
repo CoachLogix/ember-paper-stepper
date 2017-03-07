@@ -25,8 +25,7 @@
   },
   "dependencies": {
     "ember-cli-babel": "^5.1.7",
-    "ember-cli-htmlbars": "^1.1.1",
-    "ember-composability-tools": "0.0.7"
+    "ember-cli-htmlbars": "^1.1.1"
   },
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.5",
@@ -49,7 +48,7 @@
     "ember-disable-prototype-extensions": "^1.1.0",
     "ember-export-application-global": "^1.0.5",
     "ember-load-initializers": "^0.6.0",
-    "ember-paper": "miguelcobain/ember-paper#master",
+    "ember-paper": "1.0.0-alpha.18",
     "ember-resolver": "^2.0.3",
     "ember-source": "~2.11.0",
     "ember-welcome-page": "^2.0.2",
