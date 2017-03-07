@@ -65,21 +65,21 @@
       {{/step.actions}}
     {{/stepper.step}}
 
-    {{#paper-form onValidityChange=(action "validityChange") as |form|}}
-      {{#stepper.step label="Create a group" summary=groupName error=(if isInvalid "Please fill in all the fields.") as |step|}}
-          {{#step.body}}
-            {{form.input required=true label="Group name" value=groupName onChange=(action (mut groupName)) hideAllMessages=true}}
-          {{/step.body}}
-          {{#step.actions as |nextStep previousStep|}}
-            {{#paper-button primary=true raised=true disabled=form.isInvalid onClick=(action nextStep)}}
-              Continue
-            {{/paper-button}}
-            {{#paper-button onClick=(action previousStep)}}
-              Back
-            {{/paper-button}}
-          {{/step.actions}}
-      {{/stepper.step}}
-    {{/paper-form}}
+    {{#stepper.step label="Create a group" summary=groupName error=(if isInvalid "Please fill in all the fields.") as |step|}}
+      {{#paper-form onValidityChange=(action "validityChange") as |form|}}
+        {{#step.body}}
+          {{form.input required=true label="Group name" value=groupName onChange=(action (mut groupName)) hideAllMessages=true}}
+        {{/step.body}}
+        {{#step.actions as |nextStep previousStep|}}
+          {{#paper-button primary=true raised=true disabled=form.isInvalid onClick=(action nextStep)}}
+            Continue
+          {{/paper-button}}
+          {{#paper-button onClick=(action previousStep)}}
+            Back
+          {{/paper-button}}
+        {{/step.actions}}
+      {{/paper-form}}
+    {{/stepper.step}}
 
     {{#stepper.step label="Create an ad" optional=true as |step|}}
       {{#step.body}}

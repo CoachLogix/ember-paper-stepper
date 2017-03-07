@@ -42,13 +42,13 @@
     </md-steppers-header>
   {{/if}}
 
-  {{#if isActive}}
-    <md-steppers-scope class="layout-column md-steppers-scope">
+  <md-steppers-scope class="layout-column md-steppers-scope">
+    {{#if isActive}}
       {{yield (hash
         body=(component bodyComponent vertical=vertical)
         actions=(component actionsComponent nextStep=nextStep previousStep=previousStep)
       )}}
-    </md-steppers-scope>
-  {{/if}}
+    {{/if}}
+  </md-steppers-scope>
 
 </div>
