@@ -5,5 +5,5 @@ const { Component } = Ember;
 export default Component.extend({
   layout,
   tagName: 'md-step-body',
-  classNames: ['md-padding']
+  classNameBindings: ['vertical::md-padding']
 });

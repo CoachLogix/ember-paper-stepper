@@ -41,7 +41,7 @@
   {{#if isActive}}
     <md-steppers-scope class="layout-column md-steppers-scope">
       {{yield (hash
-        body=(component bodyComponent)
+        body=(component bodyComponent vertical=vertical)
         actions=(component actionsComponent nextStep=nextStep previousStep=previousStep)
       )}}
     </md-steppers-scope>
