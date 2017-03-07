@@ -47,15 +47,13 @@
                     {{step.error}}
                   </small>
                 {{else}}
-                  <small>
-                    {{#if step.summary}}
-                      {{step.summary}}
-                    {{else}}
-                      {{#if step.optional}}
-                        {{step.optionalLabel}}
-                      {{/if}}
+                  {{#if step.summary}}
+                    <small>{{step.summary}}</small>
+                  {{else}}
+                    {{#if step.optional}}
+                      <small>{{step.optionalLabel}}</small>
                     {{/if}}
-                  </small>
+                  {{/if}}
                 {{/if}}
               </div>
 

@@ -26,15 +26,13 @@
                 {{error}}
               </small>
             {{else}}
-              <small>
-                {{#if summary}}
-                  {{summary}}
-                {{else}}
-                  {{#if optional}}
-                    {{optionalLabel}}
-                  {{/if}}
+              {{#if summary}}
+                <small>{{summary}}</small>
+              {{else}}
+                {{#if optional}}
+                  <small>{{optionalLabel}}</small>
                 {{/if}}
-              </small>
+              {{/if}}
             {{/if}}
           </div>
 

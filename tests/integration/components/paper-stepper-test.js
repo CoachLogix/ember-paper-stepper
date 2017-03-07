@@ -229,6 +229,22 @@ test('adds mobile class if `mobileStepper` is true', function(assert) {
     assert.equal(this.$(`.md-steppers-${mode} .md-stepper-title small`).text().trim(), 'this is optional', 'with the correct text');
   });
 
+  test(`${mode} stepper: if \`summary\` is true adds summary label`, function(assert) {
+    assert.expect(2);
+    this.vertical = vertical;
+
+    this.render(hbs`
+      {{#paper-stepper vertical=vertical as |stepper|}}
+        {{stepper.step label="Step 1" summary="This is a summary" optional=true}}
+        {{stepper.step label="Step 2"}}
+        {{stepper.step label="Step 3"}}
+      {{/paper-stepper}}
+    `);
+
+    assert.equal(this.$(`.md-steppers-${mode} .md-stepper-title small`).length, 1, 'one summary was rendered');
+    assert.equal(this.$(`.md-steppers-${mode} .md-stepper-title small`).text().trim(), 'This is a summary', 'with the correct text (takes precedence over `optional`)');
+  });
+
   test(`${mode} stepper: clicking step button makes it the current step if linear is false`, function(assert) {
     assert.expect(8);
     this.vertical = vertical;
