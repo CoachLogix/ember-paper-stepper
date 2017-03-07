@@ -213,8 +213,8 @@ test('adds mobile class if `mobileStepper` is true', function(assert) {
     assert.equal(this.$(`.md-steppers-${mode} .md-stepper-error-message`).text().trim(), 'some error message', 'error message was rendered');
   });
 
-  test(`${mode} stepper: if \`optional\` is true add optional class and label`, function(assert) {
-    assert.expect(3);
+  test(`${mode} stepper: if \`optional\` is true add optional label`, function(assert) {
+    assert.expect(2);
     this.vertical = vertical;
 
     this.render(hbs`
@@ -225,7 +225,6 @@ test('adds mobile class if `mobileStepper` is true', function(assert) {
       {{/paper-stepper}}
     `);
 
-    assert.ok(this.$(`.md-steppers-${mode} .md-stepper-indicator`).eq(1).hasClass('md-stepper-optional'), 'second step has optional class');
     assert.equal(this.$(`.md-steppers-${mode} .md-stepper-title small`).length, 1, 'one optional message was rendered');
     assert.equal(this.$(`.md-steppers-${mode} .md-stepper-title small`).text().trim(), 'this is optional', 'with the correct text');
   });

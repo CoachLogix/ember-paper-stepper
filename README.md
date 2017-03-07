@@ -68,6 +68,8 @@ This component yields a hash that contains a `step` component which you can use 
 - `error` - Set this property to a string containing an error message. Use this property to
   1. user an error style on the respective header buttons to an error style
   2. display an error message on the respective header button
+- `summary` - you can specify a summary for each step. This text will be displayed next to the step number.
+It is useful to remember the user what has been selected in previous steps. *This will take precedence over the `optional` option.*
 - `stepNumber` - this property is automatically assigned by the parent stepper *based on the rendering order*. For most
 use cases you won't need this property and the default behavior is enough. However, in some cases you may want to insert
 some steps dynamically in the middle of the steps. This makes sure that the steps are ordered when rendered. You don't

@@ -22,7 +22,7 @@
 
       <md-steppers-header class="md-steppers-header md-steppers-horizontal md-whiteframe-1dp">
         {{#each steps as |step|}}
-          <button class="md-stepper-indicator {{if step.isActive "md-active"}} {{if step.isCompleted "md-completed"}} {{if step.hasError "md-error"}} {{if step.showOptional "md-stepper-optional"}}" disabled={{step.isButtonDisabled}}
+          <button class="md-stepper-indicator {{if step.isActive "md-active"}} {{if step.isCompleted "md-completed"}} {{if step.hasError "md-error"}}" disabled={{step.isButtonDisabled}}
             onclick={{if linear null (action goTo step.stepNumber)}}>
             <div class="md-stepper-indicator-wrapper">
 
@@ -47,9 +47,15 @@
                     {{step.error}}
                   </small>
                 {{else}}
-                  {{#if step.optional}}
-                    <small>{{step.optionalLabel}}</small>
-                  {{/if}}
+                  <small>
+                    {{#if step.summary}}
+                      {{step.summary}}
+                    {{else}}
+                      {{#if step.optional}}
+                        {{step.optionalLabel}}
+                      {{/if}}
+                    {{/if}}
+                  </small>
                 {{/if}}
               </div>
 

@@ -258,6 +258,19 @@ md-icon.md-default-theme.md-stepper-icon {
   transition: $swift-ease-out;
   font-size: 14px;
   line-height: 24px;
+
+  text-align: left;
+  white-space: nowrap;
+
+  small:not(.md-stepper-error-message) {
+    color: rgba(0, 0, 0, .54);
+  }
+
+  small {
+    transition: $swift-ease-out;
+    font-size: 12px;
+    line-height: 1em;
+  }
 }
 
 .md-steppers-content {
@@ -291,28 +304,6 @@ md-icon.md-default-theme.md-stepper-icon {
 .md-steppers-actions {
   display: flex;
 }
-
-
-// --------------------------------------------------
-// OPTIONAL
-
-.md-stepper-optional {
-  .md-stepper-title {
-    text-align: left;
-    white-space: nowrap;
-
-    small:not(.md-stepper-error-message) {
-      color: rgba(0, 0, 0, .54);
-    }
-
-    small {
-      transition: $swift-ease-out;
-      font-size: 12px;
-      line-height: 1em;
-    }
-  }
-}
-
 
 
 // --------------------------------------------------
