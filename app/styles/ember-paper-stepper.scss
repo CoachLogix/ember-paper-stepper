@@ -450,13 +450,17 @@ md-icon.md-default-theme.md-stepper-icon {
 
 .md-steppers-vertical {
 
+  .md-stepper-number {
+    margin: 0 8px 0 0;
+  }
+
   .md-stepper {
-    padding: 8px 24px;
+    padding: 8px 0;
   }
 
   .md-steppers-scope {
     //display: block;
-    margin-left:20px;
+    margin-left: 12px;
     border-left: 1px solid  #E8E8E8;
     padding-left: 20px;
   }
