@@ -12,21 +12,21 @@ export default Component.extend(ChildMixin, {
 
   optionalLabel: 'Optional',
 
-  isActive: computed('stepNumber', 'currentStep', function() {
-    return this.get('stepNumber') === this.get('currentStep');
+  isActive: computed('orderedIndex', 'currentStep', function() {
+    return this.get('orderedIndex') === this.get('currentStep');
   }),
 
-  isCompleted: computed('stepNumber', 'currentStep', 'linear', function() {
-    let { stepNumber, currentStep, linear } = this.getProperties('stepNumber', 'currentStep', 'linear');
-    return linear && stepNumber < currentStep;
+  isCompleted: computed('orderedIndex', 'currentStep', 'linear', function() {
+    let { orderedIndex, currentStep, linear } = this.getProperties('orderedIndex', 'currentStep', 'linear');
+    return linear && orderedIndex < currentStep;
   }),
 
   hasError: computed.bool('error'),
 
   showOptional: computed.or('optional', 'hasError'),
 
-  stepNumberLabel: computed('stepNumber', function() {
-    return this.get('stepNumber') + 1;
+  stepNumberLabel: computed('orderedIndex', function() {
+    return this.get('orderedIndex') + 1;
   }),
 
   isButtonDisabled: computed.or('linear', 'isActive')

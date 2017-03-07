@@ -30,7 +30,15 @@ export default Component.extend(ParentMixin, {
   }),
   totalSteps: computed.reads('steps.length'),
 
-  steps: computed.reads('childComponents'),
+  stepsSorting: ['stepNumber'],
+  steps: computed.sort('childComponents', function(a, b) {
+    if (a.get('stepNumber') > b.get('stepNumber')) {
+      return 1;
+    } else if (a.get('stepNumber') < b.get('stepNumber')) {
+      return -1;
+    }
+    return 0;
+  }),
 
   mobileHeaderTemplate: 'Step %@ of %@',
   mobileHeaderLabel: computed('mobileHeaderTemplate', 'currentStepLabel', 'totalSteps', function() {
@@ -62,7 +70,26 @@ export default Component.extend(ParentMixin, {
 
   registerChild(childComponent) {
     this._super(...arguments);
-    let stepNumber = this.childComponents.indexOf(childComponent);
-    childComponent.set('stepNumber', stepNumber);
+    // automatically set stepNumber if not manually set
+    if (childComponent.get('stepNumber') === undefined) {
+      let stepNumber = this.childComponents.get('length');
+      childComponent.set('stepNumber', stepNumber - 1);
+    }
+
+    this.updateLabels();
+  },
+
+  unregisterChild() {
+    this._super(...arguments);
+    this.updateLabels();
+  },
+
+  updateLabels() {
+    // update labels based on the sorted index
+    this.get('steps').forEach((c, i) => {
+      if (c.get('orderedIndex') !== i) {
+        c.set('orderedIndex', i);
+      }
+    });
   }
 });

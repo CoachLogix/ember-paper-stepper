@@ -49,7 +49,7 @@ test('adds mobile class if `mobileStepper` is true', function(assert) {
   let vertical = mode === 'vertical';
 
   test(`${mode} stepper: renders step buttons with correct labels`, function(assert) {
-    assert.expect(4);
+    assert.expect(7);
     this.vertical = vertical;
 
     this.render(hbs`
@@ -60,11 +60,97 @@ test('adds mobile class if `mobileStepper` is true', function(assert) {
       {{/paper-stepper}}
     `);
 
-    let buttons = this.$(`.md-steppers-${mode} button.md-stepper-indicator .md-stepper-title`);
+    let buttons = this.$(`.md-steppers-${mode} button.md-stepper-indicator`);
 
     assert.equal(buttons.length, 3, 'renders 3 buttons');
     buttons.toArray().forEach((button, i) => {
-      assert.equal(button.textContent.trim(), `Step ${i + 1}`, `renders the "Step ${i + 1} label`);
+      assert.equal(button.querySelector('.md-stepper-number').textContent.trim(), i + 1, `renders number ${i + 1}`);
+      assert.equal(button.querySelector('.md-stepper-title').textContent.trim(), `Step ${i + 1}`, `renders the "Step ${i + 1} label`);
+    });
+  });
+
+  test(`${mode} stepper: you can render steps using an each`, function(assert) {
+    assert.expect(7);
+    this.vertical = vertical;
+    this.steps = ['Step 1', 'Step 2', 'Step 3'];
+
+    this.render(hbs`
+      {{#paper-stepper vertical=vertical as |stepper|}}
+        {{#each steps as |label|}}
+          {{stepper.step label=label}}
+        {{/each}}
+      {{/paper-stepper}}
+    `);
+
+    let buttons = this.$(`.md-steppers-${mode} button.md-stepper-indicator`);
+
+    assert.equal(buttons.length, 3, 'renders 3 buttons');
+    buttons.toArray().forEach((button, i) => {
+      assert.equal(button.querySelector('.md-stepper-number').textContent.trim(), i + 1, `renders number ${i + 1}`);
+      assert.equal(button.querySelector('.md-stepper-title').textContent.trim(), `Step ${i + 1}`, `renders the "Step ${i + 1} label`);
+    });
+  });
+
+  test(`${mode} stepper: later rendered steps order`, function(assert) {
+    assert.expect(7);
+    this.vertical = vertical;
+
+    this.render(hbs`
+      {{#paper-stepper vertical=vertical as |stepper|}}
+        {{stepper.step label="Step 1" stepNumber=1}}
+        {{#if step2enabled}}
+          {{stepper.step label="Step 2" stepNumber=2}}
+        {{/if}}
+        {{stepper.step label="Step 3" stepNumber=3}}
+      {{/paper-stepper}}
+    `);
+
+    let buttons = this.$(`.md-steppers-${mode} button.md-stepper-indicator .md-stepper-number`);
+
+    assert.equal(buttons.length, 2, 'renders 2 buttons');
+    buttons.toArray().forEach((button, i) => {
+      assert.equal(button.textContent.trim(), i + 1, `renders number ${i + 1}`);
+    });
+
+    this.set('step2enabled', true);
+
+    buttons = this.$(`.md-steppers-${mode} button.md-stepper-indicator .md-stepper-number`);
+
+    assert.equal(buttons.length, 3, 'renders 3 buttons');
+    buttons.toArray().forEach((button, i) => {
+      assert.equal(button.textContent.trim(), i + 1, `renders number ${i + 1}`);
+    });
+  });
+
+  test(`${mode} stepper: later destroyed steps order`, function(assert) {
+    assert.expect(7);
+    this.vertical = vertical;
+    this.step2enabled = true;
+
+    this.render(hbs`
+      {{#paper-stepper vertical=vertical as |stepper|}}
+        {{stepper.step label="Step 1" stepNumber=1}}
+        {{#if step2enabled}}
+          {{stepper.step label="Step 2" stepNumber=2}}
+        {{/if}}
+        {{stepper.step label="Step 3" stepNumber=3}}
+      {{/paper-stepper}}
+    `);
+
+    let buttons = this.$(`.md-steppers-${mode} button.md-stepper-indicator .md-stepper-number`);
+
+    assert.equal(buttons.length, 3, 'renders 3 buttons');
+    buttons.toArray().forEach((button, i) => {
+      assert.equal(button.textContent.trim(), i + 1, `renders number ${i + 1}`);
+    });
+
+    this.set('step2enabled', false);
+
+    buttons = this.$(`.md-steppers-${mode} button.md-stepper-indicator .md-stepper-number`);
+
+    assert.equal(buttons.length, 2, 'renders 2 buttons');
+    buttons.toArray().forEach((button, i) => {
+      assert.equal(button.textContent.trim(), i + 1, `renders number ${i + 1}`);
     });
   });
 
@@ -220,7 +306,7 @@ test('nextStep and previousStep actions changes the current step', function(asse
   assert.ok(buttons.eq(0).hasClass('md-active'), 'first step has md-active class again');
 });
 
-test('nextStep and previousStep actions changes the current step', function(assert) {
+test('completing the last step triggers an `onStepperCompleted` action', function(assert) {
   assert.expect(2);
 
   this.currentStep = 2;
@@ -245,6 +331,44 @@ test('nextStep and previousStep actions changes the current step', function(asse
   let buttons = this.$('.md-steppers-horizontal button.md-stepper-indicator');
 
   assert.ok(buttons.eq(2).hasClass('md-active'), 'last step has md-active class');
+
+  this.$('.next-button').click();
+});
+
+test('completing the last step triggers an `onStepperCompleted` action (last step was rendered afterwards)', function(assert) {
+  assert.expect(3);
+
+  this.currentStep = 1;
+  this.onStepperCompleted = () => {
+    assert.ok(true, 'onStepperCompleted was called');
+  };
+
+  this.render(hbs`
+    {{#paper-stepper vertical=vertical currentStep=currentStep onStepperCompleted=(action onStepperCompleted) as |stepper|}}
+      {{stepper.step label="Step 1"}}
+      {{stepper.step label="Step 2"}}
+      {{#if show}}
+        {{#stepper.step label="Step 3" as |step|}}
+          {{#step.actions as |nextStep|}}
+            {{#paper-button class="next-button" onClick=(action nextStep)}}
+              Complete
+            {{/paper-button}}
+          {{/step.actions}}
+        {{/stepper.step}}
+      {{/if}}
+    {{/paper-stepper}}
+  `);
+
+  let buttons = this.$('.md-steppers-horizontal button.md-stepper-indicator');
+
+  assert.ok(buttons.eq(1).hasClass('md-active'), 'second step has md-active class');
+
+  this.set('show', true);
+  this.set('currentStep', 2);
+
+  buttons = this.$('.md-steppers-horizontal button.md-stepper-indicator');
+
+  assert.ok(buttons.eq(2).hasClass('md-active'), 'third step has md-active class');
 
   this.$('.next-button').click();
 });
