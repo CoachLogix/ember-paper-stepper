@@ -50,11 +50,12 @@ Don't forget to import your styles in your `app.scss` **after** importing ember 
 
 ### `{{#paper-stepper as |stepper|}}`
 
+- `currentStep` - defaults to `0` - this is the 0-indexed number of the current active step. Use this together with `onStepChange` to update steps.
 - `vertical` - defaults to `false` - this toggles the stepper between vertical and horizontal modes.
 - `linear` - defaults to `true` - if `true`, the user must pass through all the steps in a "linear" fashion. If `false`, the user is able to click on the steps at will, not following any particular order.
 - `alternative` - if `true`, the stepper will show an alternative form of the horizontal stepper detailed in the spec. Only works when `vertical` is falsy.
 - `mobileStepper` - if `true`, an *horizontal* stepper will turn into a mobile stepper if viewport width is below `599px`.
-- `onStepChange` - an action that is sent when a nextStep, previousStep or header button is pressed.
+- `onStepChange` - an action that is sent when a nextStep, previousStep or header button is pressed. Use this together with `currentStep` to update steps.
 - `onStepperCompleted` - an action that is sent when a nextStep button is pressed on the last step.
 
 This component yields a hash that contains a `step` component which you can use to define multiple steps.
@@ -67,12 +68,17 @@ This component yields a hash that contains a `step` component which you can use 
 - `error` - Set this property to a string containing an error message. Use this property to
   1. user an error style on the respective header buttons to an error style
   2. display an error message on the respective header button
+- `stepNumber` - this property is automatically assigned by the parent stepper *based on the rendering order*. For most
+use cases you won't need this property and the default behavior is enough. However, in some cases you may want to insert
+some steps dynamically in the middle of the steps. This makes sure that the steps are ordered when rendered. You don't
+need to specify sequencial numbers. You can use, for example, steps with stepNumbers `1`, `8` and `10`.
+They will be rendered in the correct order.
 
 This component yields a hash that contains a `body` and an `actions` component which you can use to define multiple the content of the step.
 
 ### `{{#step.body}}`
 
-Use this component just to render your content with the correct styles.
+Use this component to render your content with the correct styles/markup.
 
 ### `{{#step.actions as |nextStep previousStep|}}`
 
