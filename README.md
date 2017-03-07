@@ -80,6 +80,10 @@ This component yields two actions: `nextStep` and `previousStep`.
 You can use those actions in any way you prefer.
 They work perfectly using ember-paper's paper-button like: `{{#paper-button onClick=(action nextStep)`
 
+## Credits
+
+This addon was inspired by [material-steppers](https://github.com/eberlitz/material-steppers) project.
+
 ## Running
 
 * `ember serve`
