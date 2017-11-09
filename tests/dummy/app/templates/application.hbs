@@ -38,7 +38,7 @@
   {{/if}}
 
   {{#paper-stepper
-    class=(if vertical "" "md-whiteframe-4dp limit-height")
+    class=(concat "limit-height " (if vertical "" "md-whiteframe-4dp"))
     currentStep=currentStep
     linear=linear
     vertical=vertical

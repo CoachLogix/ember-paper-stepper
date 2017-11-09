@@ -4,7 +4,7 @@
   {{if vertical "md-steppers-vertical"}}
   {{if mobileStepper "md-steppers-mobile-step-text"}}">
 
-  <md-steppers-content class="md-steppers-content layout-column">
+  <md-steppers-content class="md-steppers-content {{unless vertical "layout-column"}}">
     {{yield (hash
       step=(component stepComponent
         currentStep=currentStep

@@ -7,8 +7,7 @@ const { Component, computed } = Ember;
 export default Component.extend(ChildMixin, {
   layout,
   tagName: 'md-step',
-  classNames: ['layout-column'],
-  classNameBindings: ['isActive:flex'],
+  classNameBindings: ['vertical::layout-column', 'isActiveAndHorizontal:flex'],
   bodyComponent: 'paper-step-body',
   actionsComponent: 'paper-step-actions',
 
@@ -16,6 +15,10 @@ export default Component.extend(ChildMixin, {
 
   isActive: computed('orderedIndex', 'currentStep', function() {
     return this.get('orderedIndex') === this.get('currentStep');
+  }),
+
+  isActiveAndHorizontal: computed('isActive', 'vertical', function() {
+    return this.get('isActive') && !this.get('vertical');
   }),
 
   isCompleted: computed('orderedIndex', 'currentStep', 'linear', function() {
