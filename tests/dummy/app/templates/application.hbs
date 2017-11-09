@@ -38,7 +38,7 @@
   {{/if}}
 
   {{#paper-stepper
-    class=(if vertical "" "md-whiteframe-4dp")
+    class=(if vertical "" "md-whiteframe-4dp limit-height")
     currentStep=currentStep
     linear=linear
     vertical=vertical
@@ -66,7 +66,7 @@
     {{/stepper.step}}
 
     {{#stepper.step label="Create a group" summary=groupName error=(if isInvalid "Please fill in all the fields.") as |step|}}
-      {{#paper-form onValidityChange=(action "validityChange") as |form|}}
+      {{#paper-form class="layout-column flex" onValidityChange=(action "validityChange") as |form|}}
         {{#step.body}}
           {{form.input required=true label="Group name" value=groupName onChange=(action (mut groupName)) hideAllMessages=true}}
         {{/step.body}}

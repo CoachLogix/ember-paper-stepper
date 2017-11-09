@@ -1,4 +1,4 @@
-<div class="md-stepper {{if isActive "md-active"}}">
+<div class="md-stepper {{if isActive "md-active"}} layout-column flex">
   {{#if vertical}}
     <md-steppers-header class="md-steppers-header">
       <button class="md-stepper-indicator {{if isActive "md-active"}} {{if isCompleted "md-completed"}} {{if hasError "md-error"}}" disabled={{isButtonDisabled}}
@@ -42,7 +42,7 @@
     </md-steppers-header>
   {{/if}}
 
-  <md-steppers-scope class="layout-column md-steppers-scope">
+  <md-steppers-scope class="layout-column flex md-steppers-scope">
     {{#if isActive}}
       {{yield (hash
         body=(component bodyComponent vertical=vertical)

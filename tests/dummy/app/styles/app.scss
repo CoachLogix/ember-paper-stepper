@@ -2,3 +2,7 @@ $primary: "blue";
 
 @import "ember-paper";
 @import "ember-paper-stepper";
+
+.limit-height {
+  height: 400px;
+}

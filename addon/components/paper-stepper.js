@@ -17,6 +17,7 @@ function computedFallbackIfUndefined(fallback) {
 export default Component.extend(ParentMixin, {
   layout,
   tagName: 'md-stepper',
+  classNames: ['layout-column'],
 
   stepComponent: 'paper-step',
 

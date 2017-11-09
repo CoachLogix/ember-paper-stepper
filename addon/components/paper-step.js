@@ -7,6 +7,8 @@ const { Component, computed } = Ember;
 export default Component.extend(ChildMixin, {
   layout,
   tagName: 'md-step',
+  classNames: ['layout-column'],
+  classNameBindings: ['isActive:flex'],
   bodyComponent: 'paper-step-body',
   actionsComponent: 'paper-step-actions',
 
