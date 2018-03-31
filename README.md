@@ -78,6 +78,8 @@ They will be rendered in the correct order.
 
 This component yields a hash that contains a `body` and an `actions` component which you can use to define multiple the content of the step.
 
+The hash also contains `nexStep` and `previousStep` actions to be used separately.
+
 ### `{{#step.body}}`
 
 Use this component to render your content with the correct styles/markup.
