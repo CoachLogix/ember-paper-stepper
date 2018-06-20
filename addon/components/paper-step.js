@@ -1,8 +1,8 @@
-import Ember from 'ember';
+import { bool, or } from '@ember/object/computed';
+import Component from '@ember/component';
+import { computed } from '@ember/object';
 import layout from '../templates/components/paper-step';
 import { ChildMixin } from 'ember-composability-tools';
-
-const { Component, computed } = Ember;
 
 export default Component.extend(ChildMixin, {
   layout,
@@ -26,13 +26,13 @@ export default Component.extend(ChildMixin, {
     return linear && orderedIndex < currentStep;
   }),
 
-  hasError: computed.bool('error'),
+  hasError: bool('error'),
 
-  showOptional: computed.or('optional', 'hasError'),
+  showOptional: or('optional', 'hasError'),
 
   stepNumberLabel: computed('orderedIndex', function() {
     return this.get('orderedIndex') + 1;
   }),
 
-  isButtonDisabled: computed.or('linear', 'isActive')
+  isButtonDisabled: or('linear', 'isActive')
 });

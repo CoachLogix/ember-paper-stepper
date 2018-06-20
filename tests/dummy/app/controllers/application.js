@@ -1,11 +1,11 @@
-import Ember from 'ember';
-const { Controller, computed } = Ember;
+import { reads } from '@ember/object/computed';
+import Controller from '@ember/controller';
 
 export default Controller.extend({
   linear: true,
   vertical: true,
 
-  clampedStep: computed.reads('currentStep'),
+  clampedStep: reads('currentStep'),
 
   actions: {
     toggle(propName) {

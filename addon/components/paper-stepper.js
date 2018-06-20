@@ -1,7 +1,9 @@
-import Ember from 'ember';
+import { reads, sort } from '@ember/object/computed';
+import Component from '@ember/component';
+import { computed } from '@ember/object';
+import { loc } from '@ember/string';
 import layout from '../templates/components/paper-stepper';
 import { ParentMixin } from 'ember-composability-tools';
-const { Component, computed, String: { loc } } = Ember;
 
 function computedFallbackIfUndefined(fallback) {
   return computed({
@@ -29,10 +31,9 @@ export default Component.extend(ParentMixin, {
   currentStepLabel: computed('currentStep', function() {
     return this.get('currentStep') + 1;
   }),
-  totalSteps: computed.reads('steps.length'),
+  totalSteps: reads('steps.length'),
 
-  stepsSorting: ['stepNumber'],
-  steps: computed.sort('childComponents', function(a, b) {
+  steps: sort('childComponents', function(a, b) {
     if (a.get('stepNumber') > b.get('stepNumber')) {
       return 1;
     } else if (a.get('stepNumber') < b.get('stepNumber')) {
@@ -48,24 +49,26 @@ export default Component.extend(ParentMixin, {
   }),
 
   goTo(stepNumber) {
-    if (stepNumber < this.get('totalSteps')) {
-      this.sendAction('onStepChange', stepNumber);
+    if (stepNumber < this.get('totalSteps') && this.get('onStepChange')) {
+      this.get('onStepChange')(stepNumber);
     }
   },
 
   nextStep() {
     if (this.get('currentStep') < this.get('totalSteps')) {
       let nextStep = this.get('currentStep') + 1;
-      this.sendAction('onStepChange', nextStep);
-      if (nextStep === this.get('totalSteps')) {
-        this.sendAction('onStepperCompleted');
+      if (this.get('onStepChange')) {
+        this.get('onStepChange')(nextStep);
+      }
+      if (nextStep === this.get('totalSteps') && this.get('onStepperCompleted')) {
+        this.get('onStepperCompleted')();
       }
     }
   },
 
   previousStep() {
-    if (this.get('currentStep') > 0) {
-      this.sendAction('onStepChange', this.get('currentStep') - 1);
+    if (this.get('currentStep') > 0 && this.get('onStepChange')) {
+      this.get('onStepChange')(this.get('currentStep') - 1);
     }
   },
 
