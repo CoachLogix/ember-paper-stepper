@@ -45,7 +45,7 @@ module.exports = function(environment) {
 
   if (environment === 'production') {
     ENV.locationType = 'hash';
-    ENV.rootURL = '/ember-paper-stepper/';
+    ENV.rootURL = '/ember-paper-stepper';
     // here you can enable a production-specific feature
   }
 
