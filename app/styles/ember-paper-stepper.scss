@@ -140,6 +140,9 @@ md-steppers-header, md-steppers-mobile-header, md-step-actions {
   &.md-active {
     .md-stepper-number {
       background-color: $paper-stepper-primary;
+      @if function-exists(paper-var) {
+        background-color: paper-var(--primary-500);
+      }
     }
 
     .md-stepper-title {
