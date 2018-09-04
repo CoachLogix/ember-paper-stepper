@@ -16,7 +16,7 @@ $swift-linear-duration: 0.08s;
 $swift-linear-timing-function: linear;
 $swift-linear: all $swift-linear-duration $swift-linear-timing-function;
 
-$paper-stepper-primary: color($primary);
+$paper-stepper-primary: if(function-exists(paper-color), paper-color($primary), color($primary));
 
 md-stepper {
   display: block;
