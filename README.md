@@ -14,12 +14,15 @@ An example usage:
     {{#step.body}}
       {{!-- Content here. Probably some form. --}}
     {{/step.body}}
-    {{#step.actions as |nextStep previousStep|}}
+    {{#step.actions as |nextStep previousStep goTo|}}
       {{#paper-button primary=true raised=true onClick=(action nextStep)}}
         Continue
       {{/paper-button}}
       {{#paper-button onClick=(action previousStep)}}
         Back
+      {{/paper-button}}
+      {{#paper-button onClick=(action goTo 0)}}
+        Start from the beginning
       {{/paper-button}}
     {{/step.actions}}
   {{/stepper.step}}
@@ -78,17 +81,17 @@ They will be rendered in the correct order.
 
 This component yields a hash that contains a `body` and an `actions` component which you can use to define multiple the content of the step.
 
-The hash also contains `nexStep` and `previousStep` actions to be used separately.
+The hash also contains `nexStep`, `previousStep` and `goTo` actions to be used separately.
 
 ### `{{#step.body}}`
 
 Use this component to render your content with the correct styles/markup.
 
-### `{{#step.actions as |nextStep previousStep|}}`
+### `{{#step.actions as |nextStep previousStep goTo|}}`
 
-This component yields two actions: `nextStep` and `previousStep`.
+This component yields three actions: `nextStep`, `previousStep` and `goTo`.
 You can use those actions in any way you prefer.
-They work perfectly using ember-paper's paper-button like: `{{#paper-button onClick=(action nextStep)`
+They work perfectly using ember-paper's paper-button like: `{{#paper-button onClick=(action goTo 0)`
 
 ## Credits
 

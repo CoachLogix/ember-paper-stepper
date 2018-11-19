@@ -46,9 +46,10 @@
     {{#if isActive}}
       {{yield (hash
         body=(component bodyComponent vertical=vertical)
-        actions=(component actionsComponent nextStep=nextStep previousStep=previousStep)
+        actions=(component actionsComponent nextStep=nextStep previousStep=previousStep goTo=goTo)
         nextStep=nextStep
         previousStep=previousStep
+        goTo=goTo
       )}}
     {{/if}}
   </md-steppers-scope>
