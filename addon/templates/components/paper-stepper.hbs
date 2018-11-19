@@ -1,29 +1,36 @@
-<div class="flex md-steppers
-  {{if linear "md-steppers-linear"}}
-  {{if alternative "md-steppers-alternative"}}
-  {{if vertical "md-steppers-vertical"}}
-  {{if mobileStepper "md-steppers-mobile-step-text"}}">
+<div
+  class="flex md-steppers {{if linear "md-steppers-linear"}} {{if alternative "md-steppers-alternative"}} {{if vertical "md-steppers-vertical"}} {{if mobileStepper "md-steppers-mobile-step-text"}}"
+>
 
-  <md-steppers-content class="md-steppers-content {{unless vertical "layout-column"}}">
-    {{yield (hash
-      step=(component stepComponent
-        currentStep=currentStep
-        linear=linear
-        vertical=vertical
-        nextStep=(action nextStep)
-        previousStep=(action previousStep)
-        goTo=(action goTo)
-        parentComponent=this)
-    )}}
+  <md-steppers-content
+    class="md-steppers-content {{unless vertical "layout-column"}}"
+  >
+    {{yield
+      (hash
+        step=(component stepComponent
+          currentStep=currentStep
+          linear=linear
+          vertical=vertical
+          nextStep=(action nextStep)
+          previousStep=(action previousStep)
+          goTo=(action goTo)
+          parentComponent=this)
+      )
+    }}
   </md-steppers-content>
 
   {{#unless vertical}}
     <div class="md-steppers-header-region">
 
-      <md-steppers-header class="md-steppers-header md-steppers-horizontal md-whiteframe-1dp">
+      <md-steppers-header
+        class="md-steppers-header md-steppers-horizontal md-whiteframe-1dp"
+      >
         {{#each steps as |step|}}
-          <button class="md-stepper-indicator {{if step.isActive "md-active"}} {{if step.isCompleted "md-completed"}} {{if step.hasError "md-error"}}" disabled={{step.isButtonDisabled}}
-            onclick={{if linear null (action goTo step.stepNumber)}}>
+          <button
+            class="md-stepper-indicator {{if step.isActive "md-active"}} {{if step.isCompleted "md-completed"}} {{if step.hasError "md-error"}}"
+            disabled={{step.isButtonDisabled}}
+            onclick={{if linear null (action goTo step.stepNumber)}}
+          >
             <div class="md-stepper-indicator-wrapper">
 
               {{#if step.hasError}}
@@ -64,7 +71,10 @@
 
       {{#if mobileStepper}}
         <md-steppers-mobile-header class="md-steppers-mobile-header">
-          <md-toolbar flex="none" class="md-whiteframe-1dp" style="background: #f6f6f6 !important; color: #202020 !important;">
+          <md-toolbar
+            class="md-whiteframe-1dp flex-none"
+            style="background: #f6f6f6 !important; color: #202020 !important;"
+          >
             <div class="md-toolbar-tools">
               <h3>
                 <span>{{mobileHeaderLabel}}</span>

@@ -8,17 +8,36 @@
       Toggle {{if vertical "horizontal" "vertical"}}
     {{/paper-button}}
     {{#unless vertical}}
-      {{#paper-button primary=true raised=true onClick=(action "toggle" "alternative")}}
+      {{#paper-button
+        primary=true
+        raised=true
+        onClick=(action "toggle" "alternative")
+      }}
         Toggle alternative
       {{/paper-button}}
     {{/unless}}
-    {{#paper-button primary=true raised=true onClick=(action "toggle" "mobileStepper")}}
+    {{#paper-button
+      primary=true
+      raised=true
+      onClick=(action "toggle" "mobileStepper")
+    }}
       Toggle mobile stepper
     {{/paper-button}}
   </div>
-  <div class="layout-row layout-padding layout-align-center-center" style="padding: 20px 40px">
+  <div
+    class="layout-row layout-padding layout-align-center-center"
+    style="padding: 20px 40px"
+  >
     <div>Current step:</div>
-    <div class="flex">{{paper-slider discrete=true min=0 max=3 value=currentStep onChange=(action (mut currentStep))}}</div>
+    <div class="flex">
+      {{paper-slider
+        discrete=true
+        min=0
+        max=3
+        value=currentStep
+        onChange=(action (mut currentStep))
+      }}
+    </div>
   </div>
 
   {{#if showCompleteDialog}}
@@ -45,7 +64,9 @@
     alternative=alternative
     mobileStepper=mobileStepper
     onStepChange=(action (mut currentStep))
-    onStepperCompleted=(action (mut showCompleteDialog) true) as |stepper|}}
+    onStepperCompleted=(action (mut showCompleteDialog) true)
+  as |stepper|
+  }}
 
     {{#stepper.step label="Select a campaign" as |step|}}
       {{#step.body}}
@@ -65,13 +86,33 @@
       {{/step.actions}}
     {{/stepper.step}}
 
-    {{#stepper.step label="Create a group" summary=groupName error=(if isInvalid "Please fill in all the fields.") as |step|}}
-      {{#paper-form class="layout-column flex" onValidityChange=(action "validityChange") as |form|}}
+    {{#stepper.step
+      label="Create a group"
+      summary=groupName
+      error=(if isInvalid "Please fill in all the fields.")
+    as |step|
+    }}
+      {{#paper-form
+        class="layout-column flex"
+        onValidityChange=(action "validityChange")
+      as |form|
+      }}
         {{#step.body}}
-          {{form.input required=true label="Group name" value=groupName onChange=(action (mut groupName)) hideAllMessages=true}}
+          {{form.input
+            required=true
+            label="Group name"
+            value=groupName
+            onChange=(action (mut groupName))
+            hideAllMessages=true
+          }}
         {{/step.body}}
         {{#step.actions as |nextStep previousStep|}}
-          {{#paper-button primary=true raised=true disabled=form.isInvalid onClick=(action nextStep)}}
+          {{#paper-button
+            primary=true
+            raised=true
+            disabled=form.isInvalid
+            onClick=(action nextStep)
+          }}
             Continue
           {{/paper-button}}
           {{#paper-button onClick=(action previousStep)}}
