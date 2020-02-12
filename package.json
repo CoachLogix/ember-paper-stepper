@@ -24,7 +24,8 @@
     "lint:js": "eslint .",
     "start": "ember serve --port 6767",
     "test": "ember test",
-    "test:all": "ember try:each"
+    "test:all": "ember try:each",
+    "generate":"ember g component paper-step-prefix"
   },
   "dependencies": {
     "ember-cli-babel": "^7.7.3",

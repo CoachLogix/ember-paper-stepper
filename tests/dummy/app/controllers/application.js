@@ -3,7 +3,7 @@ import Controller from '@ember/controller';
 
 export default Controller.extend({
   linear: true,
-  vertical: true,
+  vertical: false,
 
   clampedStep: reads('currentStep'),
 

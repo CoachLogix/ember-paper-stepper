@@ -65,9 +65,10 @@
     mobileStepper=mobileStepper
     onStepChange=(action (mut currentStep))
     onStepperCompleted=(action (mut showCompleteDialog) true)
-  as |stepper|
+    prefix=true
+    as |stepper|
   }}
-
+    {{#stepper.prefix}}hellaodas{{/stepper.prefix}}
     {{#stepper.step label="Select a campaign" as |step|}}
       {{#step.body}}
         <p>Lorem ipsum dolor sit amet, sea in hinc oporteat sententiae, eros bonorum verterem no mea. Ei nec omnis mucius aliquam, sint tota offendit qui ex. Ad sed exerci explicari, has cu vero inermis. Nec quando fabulas ea, dicant deleniti reformidans id his, te primis legimus convenire vim. Te mea aperiri laoreet expetendis. Possim persecuti ea per, graeci putent urbanitas sed in, ius admodum volutpat ea.</p>
