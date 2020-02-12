@@ -25,6 +25,13 @@
       <md-steppers-header
         class="md-steppers-header md-steppers-horizontal md-whiteframe-1dp"
       >
+
+        <div class="md-stepper-indicator-wrapper md-stepper-indicator md-stepper-prefix">
+          <div>Hello There</div>
+        </div>
+        
+
+
         {{#each steps as |step|}}
           <button
             class="md-stepper-indicator {{if step.isActive "md-active"}} {{if step.isCompleted "md-completed"}} {{if step.hasError "md-error"}}"

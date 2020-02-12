@@ -22,7 +22,7 @@
     "build": "ember build",
     "lint:hbs": "ember-template-lint .",
     "lint:js": "eslint .",
-    "start": "ember serve",
+    "start": "ember serve --port 6767",
     "test": "ember test",
     "test:all": "ember try:each"
   },
